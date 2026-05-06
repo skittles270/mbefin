@@ -3,7 +3,7 @@ import { useLanguage } from '@/lib/i18n';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, ChevronDown } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 const VIDEOS = [
   'https://videos.pexels.com/video-files/4477613/4477613-hd_1920_1080_30fps.mp4',    // interior warehouse aerial
@@ -17,15 +17,19 @@ export default function HeroSection() {
   const [nextIndex, setNextIndex] = useState(null);
   const videoRefs = useRef([]);
 
+  useEffect(() => {
+    if (videoRefs.current[0]) {
+      videoRefs.current[0].play().catch(() => {});
+    }
+  }, []);
+
   const handleEnded = () => {
     const next = (currentIndex + 1) % VIDEOS.length;
     setNextIndex(next);
-    // Start playing the next video immediately
     if (videoRefs.current[next]) {
       videoRefs.current[next].currentTime = 0;
-      videoRefs.current[next].play();
+      videoRefs.current[next].play().catch(() => {});
     }
-    // After fade duration, make next the current
     setTimeout(() => {
       setCurrentIndex(next);
       setNextIndex(null);

@@ -16,5 +16,8 @@ export default defineConfig({
       visualEditAgent: true
     }),
     react(),
-  ]
+  ],
+  build: {
+    target: ['es2018', 'chrome80', 'firefox78', 'safari13'],
+  },
 });
