@@ -1,0 +1,16 @@
+{
+  "name": "MBE Group",
+  "short_name": "MBE Group",
+  "description": "Your Gateway to European Retail",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0d1b2a",
+  "icons": [
+    {
+      "src": "/MBE_Group_Logo-removebg-preview.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}
