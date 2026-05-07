@@ -1,6 +1,11 @@
 const isNode = typeof window === 'undefined';
 const windowObj = isNode ? { localStorage: new Map() } : window;
-const storage = windowObj.localStorage;
+let storage;
+try {
+	storage = windowObj.localStorage;
+} catch (e) {
+	storage = new Map();
+}
 
 const toSnakeCase = (str) => {
 	return str.replace(/([A-Z])/g, '_$1').toLowerCase();
@@ -49,6 +54,10 @@ const getAppParams = () => {
 }
 
 
-export const appParams = {
-	...getAppParams()
+let _params = {};
+try {
+	_params = getAppParams();
+} catch (e) {
+	// SecurityError in restrictive browser contexts (e.g. blocked storage/history access)
 }
+export const appParams = _params;
